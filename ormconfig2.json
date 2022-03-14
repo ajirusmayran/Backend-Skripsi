@@ -1,0 +1,10 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "username": "root",
+    "password": "syahrul123",
+    "database": "hajaraswad_db",
+    "synchronize": true,
+    "logging": true,
+    "entities": ["dist/**/*.entity.ts", "dist/*/*/*.entity.ts"]
+  }
