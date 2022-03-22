@@ -1,46 +1,65 @@
-import { Injectable } from '@nestjs/common';
-import e from 'express';
-import { FindCondition, FindConditions, FindOneOptions, IsNull } from 'typeorm';
-import { CreateTrackingDto } from './dto/create-tracking.dto';
-import { ListenTempTrackingDto } from './dto/listen-temp-tracking.dto';
-import { UpdateTrackingDto } from './dto/update-tracking.dto';
-import { Tracking } from './entities/tracking.entity';
-import { TempTrackingRepository } from './repository/temp-tracking.repository';
-import { TrackingRepository } from './repository/tracking.repository';
+import { Injectable } from "@nestjs/common";
+import e from "express";
+import { FindCondition, FindConditions, FindOneOptions, IsNull } from "typeorm";
+import { CreateTrackingDto } from "./dto/create-tracking.dto";
+import { ListenTempTrackingDto } from "./dto/listen-temp-tracking.dto";
+import { TrackingDetailDto } from "./dto/tracking-detail.dto";
+import { UpdateTrackingDto } from "./dto/update-tracking.dto";
+import { Tracking } from "./entities/tracking.entity";
+import { TempTrackingRepository } from "./repository/temp-tracking.repository";
+import { TrackingRepository } from "./repository/tracking.repository";
 
 @Injectable()
 export class TrackingService {
   constructor(
-    private trackingRepo : TrackingRepository,
+    private trackingRepo: TrackingRepository,
     private tempTrackRepo: TempTrackingRepository
-  ){}
-  async createTracking(createTrackingDto: CreateTrackingDto) : Promise<Tracking>{
-    const entity = this.trackingRepo.create(createTrackingDto)
-    return await this.trackingRepo.save(entity)
+  ) {}
+  async createTracking(
+    createTrackingDto: CreateTrackingDto
+  ): Promise<Tracking> {
+    const entity = this.trackingRepo.create(createTrackingDto);
+    return await this.trackingRepo.save(entity);
   }
 
-  async findAllTracking() :Promise<Tracking[]>{
-    return await this.trackingRepo.find()
+  async findAllTracking(): Promise<TrackingDetailDto[]> {
+    const tracks = await this.trackingRepo.find({ relations: ["user"] });
+    console.log(JSON.stringify(tracks));
+
+    const trackResp: TrackingDetailDto[] = tracks.map(
+      ({ id, address, createdTm, user, finishTm, finishGeo }) => {
+        const status = !finishGeo || !finishTm ? "active" : "done";
+
+        return {
+          id,
+          address,
+          createdTm,
+          username: user.name,
+          status: status,
+        };
+      }
+    );
+    return trackResp;
   }
 
   listenTempTracking(dto: ListenTempTrackingDto): boolean {
-    const entity = this.tempTrackRepo.create(dto)
-    this.tempTrackRepo.save(entity)
-    return true
+    const entity = this.tempTrackRepo.create(dto);
+    this.tempTrackRepo.save(entity);
+    return true;
   }
 
   async findTrackingActive(user?: string): Promise<Tracking[]> {
     let criteria = {
-      finishTm:null, 
-      actuallyFinishGeo:null,
-      userId: undefined
-    }
-    user ? criteria = {...criteria, userId:user} : delete criteria.userId
+      finishTm: null,
+      actuallyFinishGeo: null,
+      userId: undefined,
+    };
+    user ? (criteria = { ...criteria, userId: user }) : delete criteria.userId;
 
     return await this.trackingRepo.find({
-      where:criteria,
-      order:{createdTm:'DESC'},
-    })
+      where: criteria,
+      order: { createdTm: "DESC" },
+    });
   }
 
   findOne(id: number) {

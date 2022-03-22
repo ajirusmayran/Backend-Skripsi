@@ -1,4 +1,4 @@
 export class ListenTempTrackingDto {
-    trackId: string
-    currentGeo: string
+  trackId: string;
+  currentGeo: string;
 }
