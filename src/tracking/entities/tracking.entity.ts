@@ -1,6 +1,7 @@
 import { TimestampEntity } from "src/base/timestamp.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { TempTracking } from "./temp-tracking.entity";
 
 @Entity("tracking")
 export class Tracking extends TimestampEntity {
@@ -20,11 +21,17 @@ export class Tracking extends TimestampEntity {
   actuallyFinishGeo: string;
 
   @Column({ type: "text" })
-  address: string;
+  originAddress: string;
+
+  @Column({ type: "text" })
+  destinationAddress: string;
 
   @Column({ type: "datetime", default: null })
   finishTm: Date;
 
   @ManyToOne((type) => User, (user) => user.tracking)
   user: User;
+
+  @OneToMany((type) => TempTracking, (temp) => temp.trackId)
+  tempTracking: TempTracking[];
 }

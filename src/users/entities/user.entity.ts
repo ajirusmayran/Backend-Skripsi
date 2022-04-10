@@ -24,7 +24,7 @@ export class User extends TimestampEntity {
   @Column()
   phone: string;
 
-  @Column()
+  @Column({default:true})
   username: string;
 
   @BeforeInsert()
@@ -41,4 +41,7 @@ export class User extends TimestampEntity {
 
   @OneToMany((type) => Tracking, (tracking) => tracking.user)
   tracking: Tracking;
+
+  @Column({default:true})
+  status: boolean
 }

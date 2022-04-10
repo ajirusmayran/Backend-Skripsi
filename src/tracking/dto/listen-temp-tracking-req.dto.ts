@@ -1,4 +1,4 @@
-export class ListenTempTrackingDto {
+export class ListenTempTrackingReqDto {
   trackId: string;
   currentGeo: string;
 }

@@ -3,5 +3,6 @@ export class CreateTrackingDto {
   startGeo: string;
   finishGeo: string;
   actuallyFinishGeo?: string;
-  address?: string;
+  originAddress?: string;
+  destinationAddress?: string;
 }

@@ -11,11 +11,20 @@ import {
 import { TrackingService } from "./tracking.service";
 import { CreateTrackingDto } from "./dto/create-tracking.dto";
 import { UpdateTrackingDto } from "./dto/update-tracking.dto";
-import { ListenTempTrackingDto } from "./dto/listen-temp-tracking.dto";
+import { ListenTempTrackingReqDto } from "./dto/listen-temp-tracking-req.dto";
 
 @Controller("tracking")
 export class TrackingController {
   constructor(private readonly trackingService: TrackingService) {}
+
+  /* 
+    temp tracking API
+  */
+  @Get("temp")
+  trackCurrLocation(@Query("trackId") id: string){
+    console.log(id)
+    return this.trackingService.getLatestTempTracking(id)
+  }
 
   @Post()
   create(@Body() createTrackingDto: CreateTrackingDto) {
@@ -23,7 +32,7 @@ export class TrackingController {
   }
 
   @Post("listen")
-  listenTempTracking(@Body() listenTempTrackingDto: ListenTempTrackingDto) {
+  listenTempTracking(@Body() listenTempTrackingDto: ListenTempTrackingReqDto) {
     return this.trackingService.listenTempTracking(listenTempTrackingDto);
   }
 
@@ -35,11 +44,6 @@ export class TrackingController {
   @Get("active")
   findTrackingActive(@Query("userId") userId?: string) {
     return this.trackingService.findTrackingActive(userId);
-  }
-
-  @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.trackingService.findOne(+id);
   }
 
   @Patch(":id")
@@ -54,4 +58,5 @@ export class TrackingController {
   remove(@Param("id") id: string) {
     return this.trackingService.remove(+id);
   }
+
 }
