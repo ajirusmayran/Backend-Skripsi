@@ -15,9 +15,9 @@ import { ConfigModule } from "@nestjs/config";
   imports: [
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "localhost",
-      username: "root",
-      password: "syahrul123",
+      host: "db4free.net",
+      username: "hajaraswad",
+      password: "hajaraswad123!",
       database: "hajaraswad_db",
       synchronize: true,
       logging: true,
