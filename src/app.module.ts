@@ -19,7 +19,7 @@ import configuration from "./config/configuration"
     }),
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "34.170.251.99",
+      host: "34.101.49.199",
       username: "root",
       password: "P@ssw0rd123!",
       database: "hajaraswad_db",
