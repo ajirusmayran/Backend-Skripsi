@@ -1,7 +1,6 @@
 import { NestFactory } from "@nestjs/core"
 import { AppModule } from "./app.module"
-import { HttpExceptionFilter } from "./common/http-exception.filter"
-
+import configuration from "./config/configuration"
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule)
 	app.enableCors()
