@@ -6,11 +6,10 @@ export const databaseProviders = [
     useFactory: async () =>
       await createConnection({
         type: "mysql",
-        host: "localhost",
+        host: "http://35.229.120.72",
         port: 3306,
         username: "root",
-        // password: "syahrul123",
-        password: "",
+        password: "P@ssw0rd",
         database: "hajaraswad_db",
         entities: [__dirname + "/../**/*.entity{.ts,.js}"],
         synchronize: false,

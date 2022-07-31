@@ -10,17 +10,21 @@ import { APP_FILTER, APP_INTERCEPTOR } from "@nestjs/core";
 import { InterceptorResponse } from "./common/interceptor.response";
 import { HttpExceptionFilter } from "./common/http-exception.filter";
 import { ConfigModule } from "@nestjs/config";
+import configuration from "./config/configuration"
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      load: [configuration],
+    }),
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "localhost",
-      username: "root",
-      password: "syahrul123",
+      host: "db4free.net",
+      username: "hajaraswad",
+      password: "hajaraswad123!",
       database: "hajaraswad_db",
       synchronize: true,
-      logging: true,
+      logging: false,
       entities: [join(__dirname, "**", "*.entity.{ts,js}")],
     }),
     UsersModule,

@@ -10,6 +10,11 @@ import { AppService } from "./app.service"
 import { AuthService } from "./auth/auth.service"
 import { LocalAuthGuard } from "./auth/local-auth.guard"
 
+export interface LoginRequest {
+	username: string
+	password: string
+	isAdmin?: Boolean
+}
 @Controller()
 export class AppController {
 	constructor(

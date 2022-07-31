@@ -134,6 +134,7 @@ export class TrackingService {
 			track.finishTm = new Date()
 			await this.trackingRepo.save(track)
 		}
+		return
 	}
 
 	update(id: number, updateTrackingDto: UpdateTrackingDto) {
