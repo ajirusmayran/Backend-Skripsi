@@ -19,7 +19,7 @@ import { UserDetailDto } from "./dto/user-detail.dto";
 // @UseGuards(JwtAuthGuard)
 @Controller("users")
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -27,8 +27,8 @@ export class UsersController {
   }
 
   @Get("validate")
-  validateUsername(@Query("username") username :string){
-    if(!username){
+  validateUsername(@Query("username") username: string) {
+    if (!username) {
       throw new BadRequestException("username cannot be null")
     }
     return this.usersService.validateNewUsername(username)
@@ -43,7 +43,7 @@ export class UsersController {
   findOne(@Param("id") id: string) {
     return this.usersService.findOne(+id);
   }
-   update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
+  update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
