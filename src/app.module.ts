@@ -19,9 +19,9 @@ import configuration from "./config/configuration"
     }),
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "db4free.net",
-      username: "hajaraswad",
-      password: "hajaraswad123!",
+      host: "34.170.251.99",
+      username: "root",
+      password: "P@ssw0rd123!",
       database: "hajaraswad_db",
       synchronize: true,
       logging: false,
