@@ -19,10 +19,7 @@ import configuration from "./config/configuration"
     }),
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "34.101.49.199",
-      username: "root",
-      password: "P@ssw0rd123!",
-      database: "hajaraswad_db",
+      url:"mysql://aji:P@ssw0rd123!@34.106.142.51:3306/hajaraswad_db?allowPublicKeyRetrieval=true",
       synchronize: true,
       logging: false,
       entities: [join(__dirname, "**", "*.entity.{ts,js}")],
