@@ -19,13 +19,20 @@ export interface LoginRequest {
 export class AppController {
 	constructor(
 		private readonly appService: AppService,
-		private authService: AuthService
+		// private authService: AuthService
 	) {}
 
-	@UseGuards(LocalAuthGuard)
-	@HttpCode(200)
-	@Post("auth/login")
-	async login(@Request() request) {
-		return this.authService.login(request)
+	// @UseGuards(LocalAuthGuard)
+	// @HttpCode(200)
+	// @Post("auth/login")
+	// async login(@Request() request) {
+	// 	return this.authService.login(request)
+	// }
+	
+	@Get('health/check')
+	healthcheck(){
+		return {
+			"status":"Ok Bro Aman"
+		}
 	}
 }

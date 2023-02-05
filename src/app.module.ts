@@ -17,16 +17,16 @@ import configuration from "./config/configuration"
     ConfigModule.forRoot({
       load: [configuration],
     }),
-    TypeOrmModule.forRoot({
-      type: "mysql",
-      url:"mysql://aji:P@ssw0rd123!@34.106.142.51:3306/hajaraswad_db?allowPublicKeyRetrieval=true",
-      synchronize: true,
-      logging: false,
-      entities: [join(__dirname, "**", "*.entity.{ts,js}")],
-    }),
-    UsersModule,
-    TrackingModule,
-    AuthModule,
+    // TypeOrmModule.forRoot({
+    //   type: "mysql",
+    //   url:"mysql://aji:P@ssw0rd123!@34.106.142.51:3306/hajaraswad_db?allowPublicKeyRetrieval=true",
+    //   synchronize: true,
+    //   logging: false,
+    //   entities: [join(__dirname, "**", "*.entity.{ts,js}")],
+    // }),
+    // UsersModule,
+    // TrackingModule,
+    // AuthModule,
   ],
   controllers: [AppController],
   providers: [
